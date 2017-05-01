@@ -1,0 +1,11 @@
+<strings>
+
+    <string id="AppName">Numérique Simple</string>
+
+    <string id="ForegroundColorTitle">Couleur de premier plan</string>
+    <string id="DisplayMonthTitle">Afficher le mois</string>
+
+    <string id="ColorBlack">Noir</string>
+    <string id="ColorWhite">Blanc</string>
+    
+</strings>
