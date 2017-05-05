@@ -2,6 +2,10 @@
 Sample apps, libraries and code snippets for use with Garmin's Connect IQ SDK and the Monkey C
 programming language.
 
+NOTE: Although the repo may contain contributions from Garmin employees and/or from the Garmin
+forums, this repo is an "unofficial" repo of Connect IQ and Monkey C sample code/projects and
+nothing said or done here should be considered sanctioned by Garmin.
+
 
 ## Purpose & Goal
 The Connect IQ SDK contains a bunch of sample apps which allow you to quickly get started with
@@ -29,6 +33,12 @@ Read, run, learn and enjoy!
 
 
 ## Repo Details
+It is assumed that you are using the most current (stable/non-beta) SDK and all attempts are made
+to ensure that the code on the 'master' branch will run on the most current SDK. When a project,
+library or code snippet is only for a given version of the SDK, it will be moved to a separate branch
+named for that particular major version (eg. sdk-1.4, sdk-2.0). The repo also has (or will have)
+branches for beta versions of the SDK, when new functionality is added to an upcoming SDK.
+
 The repo is broken into 6 sections; one section for each of the different project types (app, data
 field, watch face and widget) plus a section for "libraries" and a section for "code snippets".
 
