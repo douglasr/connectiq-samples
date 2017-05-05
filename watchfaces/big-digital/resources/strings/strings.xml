@@ -1,0 +1,23 @@
+<strings>
+
+    <string id="AppName">Big Digital</string>
+    <string id="DeviceModel">fenix3</string>
+
+    <string id="BackgroundColorTitle">Background Color</string>
+    <string id="ForegroundColorTitle">Foreground Color</string>
+	<string id="MainTimeUTCTitle">Use UTC for Main Time</string>    
+    <string id="MilitaryFormatTitle">Military Format for 24 Hour Time</string>
+    <string id="DisplaySecondsTitle">Display Seconds</string>
+    <string id="DisplayStepsIndicatorTitle">Display Steps</string>
+    <string id="DisplayMoveIndicatorTitle">Display Move Warning</string>
+    <string id="DisplayBatteryIndicatorTitle">Display Battery Level</string>
+    <string id="DisplaySecondTimezoneTitle">Display Second Timezone</string>
+    <string id="SecondTimezoneOffsetTitle">Second Timezone Offset</string>
+    <string id="OverGoalWrapTitle">Wrap Around Over Step Goal</string>
+
+    <string id="ColorBlack">Black</string>
+    <string id="ColorDarkGray">Dark Gray</string>
+    <string id="ColorLightGray">Light Gray</string>
+    <string id="ColorWhite">White</string>
+
+</strings>

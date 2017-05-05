@@ -11,7 +11,13 @@ support for multiple languages.
 
 ## Project Listing
 
+- Big Digital (big-digital) : a digital watchface with big numbers
+    - layouts
+    - settings
+    - multi-device
+
 - Simple Digital (simple-digital) : a simple digital watchface
     - layouts
+    - settings
     - multi-device
     - multi-language
