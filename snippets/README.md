@@ -2,4 +2,5 @@
 Each code snippet here is in a separate file.
 
 ## Snippet Listing
-- none (yet)
+- get-properties.mc : retrieves property value (settings or object store) with a workaround for GCM issue where value might be null
+- get-properties2.mc : another way to retrieve a property value (settings or object store) with a workaround for GCM issue where value might be null
