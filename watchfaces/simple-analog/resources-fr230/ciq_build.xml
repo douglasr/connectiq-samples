@@ -1,0 +1,3 @@
+<build>
+  <exclude file="../source/devices/DefaultDevice.mc"/>
+</build>

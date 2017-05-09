@@ -1,0 +1,3 @@
+<build>
+  <exclude file="../source/devices/FR230.mc"/>
+</build>

@@ -1,0 +1,11 @@
+<settings>
+
+    <setting propertyKey="@Properties.DisplaySeconds" title="@Strings.DisplaySecondsTitle">
+        <settingConfig type="boolean" />
+    </setting>
+
+    <setting propertyKey="@Properties.DisplayBatteryIndicator" title="@Strings.DisplayBatteryIndicatorTitle">
+        <settingConfig type="boolean" />
+    </setting>
+
+</settings>

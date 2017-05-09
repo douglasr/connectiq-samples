@@ -1,0 +1,6 @@
+<properties>
+
+	<property id="DisplaySeconds" type="boolean">true</property>
+    <property id="DisplayBatteryIndicator" type="boolean">true</property>
+
+</properties>

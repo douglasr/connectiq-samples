@@ -16,6 +16,12 @@ support for multiple languages.
     - settings
     - multi-device
 
+- Simple Analog (simple-analog) : a simple analog watchface
+    - settings
+    - multi-device
+    - build exclusions
+    - background image
+
 - Simple Digital (simple-digital) : a simple digital watchface
     - layouts
     - settings
