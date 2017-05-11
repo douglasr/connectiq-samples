@@ -4,8 +4,9 @@ programming language.
 
 NOTE: Although the repo may contain contributions from Garmin employees and/or from the Garmin
 forums, this repo is an "unofficial" repo of Connect IQ and Monkey C sample code/projects and
-nothing said or done here should be considered sanctioned by Garmin.
-
+nothing said or done here should be considered sanctioned by Garmin. For the official repo of
+Connect IQ apps from Garmin, you can clone the [connectiq-apps](https://github.com/garmin/connectiq-apps)
+repo under the [Garmin](https://github.com/garmin) github account.
 
 ## Purpose & Goal
 The Connect IQ SDK contains a bunch of sample apps which allow you to quickly get started with
