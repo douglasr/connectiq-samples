@@ -1,0 +1,7 @@
+<layout id="WatchFace">
+	<drawable id="Background" class="ZenDigitalBackground" />
+    <label id="DateLabel" x="center" y="25" font="Gfx.FONT_SMALL" justification="Gfx.TEXT_JUSTIFY_CENTER" color="Gfx.COLOR_WHITE" />
+    <label id="TimeLabel" x="center" y="35" font="Gfx.FONT_NUMBER_THAI_HOT" justification="Gfx.TEXT_JUSTIFY_CENTER" color="Gfx.COLOR_WHITE" />
+    <label id="SecondTimeLabel" x="center" y="135" font="Gfx.FONT_SMALL" justification="Gfx.TEXT_JUSTIFY_CENTER" color="Gfx.COLOR_WHITE" />
+    <label id="SecondsLabel" x="163" y="130" font="Gfx.FONT_LARGE" justification="Gfx.TEXT_JUSTIFY_LEFT" color="Gfx.COLOR_WHITE" />
+</layout>

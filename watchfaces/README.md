@@ -15,6 +15,7 @@ support for multiple languages.
     - layouts
     - settings
     - multi-device
+    - always active seconds (1Hz updates)
 
 - Simple Analog (simple-analog) : a simple analog watchface
     - settings
@@ -27,3 +28,8 @@ support for multiple languages.
     - settings
     - multi-device
     - multi-language
+
+- Zen Digital (zen-digital) : a digital watchface that only displays on gesture
+    - layouts
+    - settings
+    - multi-device
