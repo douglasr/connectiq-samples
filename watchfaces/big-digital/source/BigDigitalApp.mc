@@ -5,6 +5,11 @@ using Toybox.Graphics as Gfx;
 var gDeviceSettings;
 var gFGColor;
 var gBGColor;
+var gPartialUpdatesAllowed;
+var gConfDisplaySeconds;
+var gConfDisplayStepsIndicator;
+var gConfDisplayMoveIndicator;
+var gConfDisplayBatteryIndicator;
 
 class BigDigitalApp extends App.AppBase {
 
@@ -23,30 +28,40 @@ class BigDigitalApp extends App.AppBase {
 
     //! Return the initial view of your application here
     function getInitialView() {
-        return [ new BigDigitalView() ];
+        if (Toybox.Graphics has :BufferedBitmap) {
+            $.gPartialUpdatesAllowed = true;
+            return [ new BigDigitalView(), new BigDigitalDelegate() ];
+        } else {
+            $.gPartialUpdatesAllowed = false;
+            return [ new BigDigitalView() ];
+        }
     }
 
     //! New app settings have been received so trigger a UI update
     function onSettingsChanged() {
         $.gDeviceSettings = System.getDeviceSettings();
-		$.gFGColor = getNumberProperty("ForegroundColor",Gfx.COLOR_WHITE);
-		$.gBGColor = getNumberProperty("BackgroundColor",Gfx.COLOR_BLACK);
+        $.gFGColor = getNumberProperty("ForegroundColor",Gfx.COLOR_WHITE);
+        $.gBGColor = getNumberProperty("BackgroundColor",Gfx.COLOR_BLACK);
+        $.gConfDisplaySeconds = getBooleanProperty("DisplaySeconds",true);
+        $.gConfDisplayStepsIndicator = getBooleanProperty("DisplayStepsIndicator",true);
+        $.gConfDisplayMoveIndicator = getBooleanProperty("DisplayMoveIndicator",true);
+        $.gConfDisplayBatteryIndicator = getBooleanProperty("DisplayBatteryIndicator",true);
 
         Ui.requestUpdate();
     }
 
-	function getBooleanProperty(key, initial) {
-		var value = getProperty(key);
-		if (value != null) {
-			if (value instanceof Lang.Boolean) {
-				return value;
-			} else if (value instanceof Lang.String) {
-				// added to work around GCM Android problems
-				return value.toNumber() != 0;
-			}
-		}
-		return initial;
-	}
+    function getBooleanProperty(key, initial) {
+        var value = getProperty(key);
+        if (value != null) {
+            if (value instanceof Lang.Boolean) {
+                return value;
+            } else if (value instanceof Lang.String) {
+                // added to work around GCM Android problems
+                return value.toNumber() != 0;
+            }
+        }
+        return initial;
+    }
 
     function getFloatProperty(key, initial) {
         var value = getProperty(key);
@@ -62,19 +77,19 @@ class BigDigitalApp extends App.AppBase {
         return initial;
     }
 
-	function getNumberProperty(key, initial) {
-		var value = getProperty(key);
-		if (value != null) {
-			if (value instanceof Lang.Number) {
-				return value;
-			} else if (value instanceof Lang.Float) {
-				// added to work around GCM Android problems
-				return value.toNumber();
-			} else if (value instanceof Lang.String) {
-				return value.toNumber();
-			}
-		}
-		return initial;
-	}
+    function getNumberProperty(key, initial) {
+        var value = getProperty(key);
+        if (value != null) {
+            if (value instanceof Lang.Number) {
+                return value;
+            } else if (value instanceof Lang.Float) {
+                // added to work around GCM Android problems
+                return value.toNumber();
+            } else if (value instanceof Lang.String) {
+                return value.toNumber();
+            }
+        }
+        return initial;
+    }
 
 }

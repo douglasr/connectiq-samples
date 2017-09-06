@@ -10,5 +10,6 @@
     <property id="DisplaySecondTimezone" type="boolean">true</property>
     <property id="SecondTimezoneOffset" type="float">0</property>
     <property id="OverGoalWrap" type="boolean">true</property>
+    <property id="UseZenMode" type="boolean">false</property>
 
 </properties>

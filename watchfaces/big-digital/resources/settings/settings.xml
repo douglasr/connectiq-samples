@@ -48,4 +48,8 @@
         <settingConfig type="boolean" />
     </setting>
 
+    <setting propertyKey="@Properties.UseZenMode" title="@Strings.UseZenModeTitle">
+        <settingConfig type="boolean" />
+    </setting>
+
 </settings>

@@ -14,6 +14,7 @@
     <string id="DisplaySecondTimezoneTitle">Display Second Timezone</string>
     <string id="SecondTimezoneOffsetTitle">Second Timezone Offset</string>
     <string id="OverGoalWrapTitle">Wrap Around Over Step Goal</string>
+    <string id="UseZenModeTitle">Use Zen Mode</string>
 
     <string id="ColorBlack">Black</string>
     <string id="ColorDarkGray">Dark Gray</string>
