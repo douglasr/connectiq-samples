@@ -30,6 +30,7 @@ using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 using Toybox.System as System;
 using Toybox.Application as App;
+using Toybox.Timer;
 
 class TextPickerView extends Ui.View {
 
@@ -70,7 +71,7 @@ class TextPickerView extends Ui.View {
         mMinChars = minChars;
         mMaxChars = maxChars;
         if (prefix != null) {
-            inputStr = prefix;
+            inputStr = prefix.toString();   // ensure default value passed is a string.
         }
         input_chars = INPUT_LETTERS+INPUT_CONTROLS;
         View.initialize();
@@ -153,7 +154,7 @@ class TextPickerView extends Ui.View {
             inputStr = inputStr.substring(0,inputStr.length()-1);
             // if we aren't at the maximum number of characters, then set the input characters to all
             //   and set the highlighted character to the back/delete char
-            if (inputStr.length() >= mMinChars) {
+            if (inputStr.length() < mMaxChars) {
                 input_chars = INPUT_LETTERS+INPUT_CONTROLS;
                 charIdx = INPUT_LETTERS.length(); // the character after the letters is the back/delete char
             }
