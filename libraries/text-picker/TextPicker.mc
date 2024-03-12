@@ -31,12 +31,13 @@ using Toybox.Graphics as Gfx;
 using Toybox.System as System;
 using Toybox.Application as App;
 using Toybox.Timer;
+import Toybox.Lang;
 
 class TextPickerView extends Ui.View {
 
     // this is here for completeness but is likely calculated elsewhere in an app
-    static const DEVICE_WIDTH = System.getDeviceSettings().screenHeight;
-    static const DEVICE_HEIGHT = System.getDeviceSettings().screenWidth;
+    static const DEVICE_WIDTH = System.getDeviceSettings().screenHeight as Number;
+    static const DEVICE_HEIGHT = System.getDeviceSettings().screenWidth as Number;
 
     static const INPUT_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";  // valid characters for input
     static const INPUT_CONTROLS = "<*";   // control characters for input
@@ -44,11 +45,11 @@ class TextPickerView extends Ui.View {
     static const INPUT_BACK = "<<";       // what to render in place of the '<' (delete) character
 
     // these will likely need to be changed based on device
-    static const PICKER_TITLE_POS = [95,30];                // title position
-    static const PICKER_SUBTITLE_POS = [10,80];             // subtitle/info position
-    static const PICKER_INPUT_POS = [10,DEVICE_HEIGHT/2];   // input display position
-    static const PICKER_X = 174;                            // X coordinate of left side of picker
-    static const PICKER_WIDTH = 32;                         // width of the picker (from left bar to right bar)
+    static const PICKER_TITLE_POS = [95,30] as Array<Number>;              // title position
+    static const PICKER_SUBTITLE_POS = [10,80] as Array<Number>;           // subtitle/info position
+    static const PICKER_INPUT_POS = [10,DEVICE_HEIGHT/2] as Array<Number>; // input display position
+    static const PICKER_X = 174;                                           // X coordinate of left side of picker
+    static const PICKER_WIDTH = 32;                                        // width of the picker (from left bar to right bar)
 
     // fonts to use for various text; will likely change based on device
     static const FONT_PICKER_TITLE = Gfx.FONT_SMALL;
@@ -57,15 +58,15 @@ class TextPickerView extends Ui.View {
     static const FONT_PICKER_LETTER_NOT_SELECTED = Gfx.FONT_XTINY;
     static const FONT_PICKER_LETTER_SELECTED = Gfx.FONT_TINY;
 
-    var mTitle;
-    var mSubTitle;
-    var mMinChars;
-    var mMaxChars;
-    var inputStr = "";
-    var input_chars;
-    var charIdx = 0;
+    var mTitle as String;
+    var mSubTitle as String;
+    var mMinChars as Number;
+    var mMaxChars as Number;
+    var inputStr as String = "";
+    var input_chars as String;
+    var charIdx as Number = 0;
 
-    function initialize(title, subTitle, minChars, maxChars, prefix) {
+    function initialize(title as String, subTitle as String, minChars as Number, maxChars as Number, prefix as String or Number or Null) {
         mTitle = title;
         mSubTitle = subTitle;
         mMinChars = minChars;
@@ -77,7 +78,7 @@ class TextPickerView extends Ui.View {
         View.initialize();
     }
 
-    function onUpdate(dc) {
+    function onUpdate(dc as Gfx.Dc) as Void {
         // clear whatever is on the screen to prepare for update
         dc.setColor(Gfx.COLOR_TRANSPARENT, Gfx.COLOR_BLACK);
         dc.clear();
@@ -91,7 +92,7 @@ class TextPickerView extends Ui.View {
         dc.drawLine(PICKER_X, 0, PICKER_X, DEVICE_HEIGHT);
         dc.drawLine(rightBarX, 0, rightBarX, DEVICE_HEIGHT);
 
-        var pickerFontHeight = dc.getTextDimensions(input_chars.substring(0,1), FONT_PICKER_LETTER_SELECTED)[1];
+        var pickerFontHeight = dc.getTextDimensions(input_chars.substring(0,1) as String, FONT_PICKER_LETTER_SELECTED)[1];
 
         var sidx;   // index of character at the top of visible list
         var eidx;   // index of character at the bottom of visible list
@@ -107,9 +108,9 @@ class TextPickerView extends Ui.View {
             if (sidx < 0) {
                 sidx = sidx + input_chars.length();
             }
-            if (input_chars.substring(sidx,sidx+1).equals("<")) {
+            if ("<".equals(input_chars.substring(sidx,sidx+1))) {
                 ch = INPUT_BACK;
-            } else if (input_chars.substring(sidx,sidx+1).equals("*")) {
+            } else if ("*".equals(input_chars.substring(sidx,sidx+1))) {
                 ch = INPUT_OK;
                 // grey out the 'OK' if there aren't enough characters
                 if (inputStr.length() < mMinChars) {
@@ -139,19 +140,19 @@ class TextPickerView extends Ui.View {
     }
 
 
-    function setCharIdx(idx) {
+    function setCharIdx(idx as Number) as Void {
         charIdx = idx;
         if (charIdx < 0) {
             charIdx = charIdx + input_chars.length();
         }
     }
 
-    function charSelected() {
+    function charSelected() as Void {
         // are we adding something from the list of valid letters?
         if (input_chars.length() >= INPUT_LETTERS.length() && charIdx < INPUT_LETTERS.length()) {
             inputStr = inputStr + input_chars.substring(charIdx,charIdx+1);
-        } else if (input_chars.substring(charIdx,charIdx+1).equals("<")) {
-            inputStr = inputStr.substring(0,inputStr.length()-1);
+        } else if ("<".equals(input_chars.substring(charIdx,charIdx+1))) {
+            inputStr = inputStr.substring(0,inputStr.length()-1) as String;
             // if we aren't at the maximum number of characters, then set the input characters to all
             //   and set the highlighted character to the back/delete char
             if (inputStr.length() < mMaxChars) {
@@ -174,15 +175,15 @@ class TextPickerDelegate extends Ui.BehaviorDelegate {
     // millisec between updates when long pressing up/down on picker
     static const LONG_PRESS_UPDATE_FREQUENCY = 250;
 
-    var picker;
-    var longPressTimer;
+    var picker as TextPickerView?;
+    var longPressTimer as Timer.Timer?;
 
-    function initialize(the_picker) {
+    function initialize(the_picker as TextPickerView) {
         picker = the_picker;
         BehaviorDelegate.initialize();
     }
 
-    function onKey(event) {
+    function onKey(event as Ui.KeyEvent) as Boolean {
         var key = event.getKey();
         if (key == Ui.KEY_ENTER || key == Ui.KEY_START) {
             return onSelect();
@@ -197,23 +198,23 @@ class TextPickerDelegate extends Ui.BehaviorDelegate {
     }
 
     // handle long press activity (used to scroll up or down through the list of letters)
-    function onKeyPressed(event) {
+    function onKeyPressed(event as Ui.KeyEvent) as Boolean {
         var key = event.getKey();
         if (key == Ui.KEY_UP || key == Ui.KEY_MODE) {
             longPressTimer = new Timer.Timer();
-            longPressTimer.start( method(:onPreviousPage), LONG_PRESS_UPDATE_FREQUENCY, true );
+            longPressTimer.start( method(:onPreviousPage) as Method() as Void, LONG_PRESS_UPDATE_FREQUENCY, true );
             return true;
         } else if (key == Ui.KEY_DOWN || key == Ui.KEY_CLOCK) {
             longPressTimer = new Timer.Timer();
-            longPressTimer.start( method(:onNextPage), LONG_PRESS_UPDATE_FREQUENCY, true );
+            longPressTimer.start( method(:onNextPage) as Method() as Void, LONG_PRESS_UPDATE_FREQUENCY, true );
             return true;
         }
         return false;
     }
 
-    function onKeyReleased(event) {
+    function onKeyReleased(event as Ui.KeyEvent) as Boolean {
         var key = event.getKey();
-        if (key == Ui.KEY_UP || key == Ui.KEY_MODE || key == Ui.KEY_DOWN || key == Ui.KEY_CLOCK) {
+        if ((key == Ui.KEY_UP || key == Ui.KEY_MODE || key == Ui.KEY_DOWN || key == Ui.KEY_CLOCK) && longPressTimer != null) {
             longPressTimer.stop();
             longPressTimer = null;
             return true;
@@ -221,43 +222,49 @@ class TextPickerDelegate extends Ui.BehaviorDelegate {
         return false;
     }
 
-    function onSelect() {
-        if (picker.input_chars.substring(picker.charIdx,picker.charIdx+1).equals("*")) {
-            // don't let the user select OK if there aren't enough characters...
-            if (picker.inputStr.length() < picker.mMinChars) {
-                return true;
+    function onSelect() as Boolean {
+        if (picker != null) {
+            if ("*".equals(picker.input_chars.substring(picker.charIdx,picker.charIdx+1))) {
+                // don't let the user select OK if there aren't enough characters...
+                if ((picker as TextPickerView).inputStr.length() < (picker as TextPickerView).mMinChars) {
+                    return true;
+                }
+
+                // we're selecting 'OK' so set the picker to null (to eliminate potential circ ref)
+                picker = null;
+
+                // *** TODO ***
+                // The developer (you) must do something here, both in terms of the program
+                // flow (ie. pop and/ or push a new view) and in terms of the text entered
+                Ui.popView(Ui.SLIDE_RIGHT);
+
+            } else {
+                picker.charSelected();
+                Ui.requestUpdate();
             }
-
-            // we're selecting 'OK' so set the picker to null (to eliminate potential circ ref)
-            picker = null;
-
-            // *** TODO ***
-            // The developer (you) must do something here, both in terms of the program
-            // flow (ie. pop and/ or push a new view) and in terms of the text entered
-            Ui.popView(Ui.SLIDE_RIGHT);
-
-        } else {
-            picker.charSelected();
-            Ui.requestUpdate();
         }
         return true;
     }
 
-    function onBack() {
+    function onBack() as Boolean {
         Ui.popView(Ui.SLIDE_RIGHT);
         picker = null;
         return true;
     }
 
-    function onNextPage() {
-        picker.setCharIdx((picker.charIdx+1) % picker.input_chars.length());
-        Ui.requestUpdate();
+    function onNextPage() as Boolean {
+        if (picker != null) {
+            picker.setCharIdx((picker.charIdx+1) % picker.input_chars.length());
+            Ui.requestUpdate();
+        }
         return true;
     }
 
-    function onPreviousPage() {
-        picker.setCharIdx((picker.charIdx-1) % picker.input_chars.length());
-        Ui.requestUpdate();
+    function onPreviousPage() as Boolean {
+        if (picker != null) {
+            picker.setCharIdx((picker.charIdx-1) % picker.input_chars.length());
+            Ui.requestUpdate();
+        }
         return true;
     }
 
